@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:id_card_app/constants.dart';
-import 'package:id_card_app/widgets/date_picker.dart';
 import 'package:id_card_app/screens/card_screen.dart';
+import 'package:id_card_app/widgets/country_pick.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,8 +14,21 @@ class _HomeScreenState extends State<HomeScreen> {
   final myController = TextEditingController();
   final myController2 = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
   String? gender;
+
+  DateTime date = DateTime.now();
+  Future<Null> selectTimePicker(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: date,
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now());
+    if (picked != null && picked != date) {
+      setState(() {
+        date = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 5,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                "ID Card Creater",
-                style: TextStyle(color: Colors.black),
-              ),
-            ],
+          centerTitle: true,
+          title: const Text(
+            "ID Card Creater",
+            style: TextStyle(color: Colors.black),
           ),
         ),
         body: SingleChildScrollView(
@@ -76,21 +85,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  Row(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text("Enter your birthday:"),
-                      SizedBox(width: 25,),
-                      SizedBox(
-                        height: 50,
-                        width: 150,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: DatePicker(),
-                        ),
+                    children: [
+                      ElevatedButton(
+                        child: const Text("Choose Your Birthday"),
+                        onPressed: () {
+                          selectTimePicker(context);
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                            "Your birthday: ${date.day.toString()}-${date.month.toString()}-${date.year.toString()}"),
                       ),
                     ],
                   ),
+                  const CountryPick(),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
@@ -149,7 +160,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               String surname = myController2.text;
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) {
-                                  return CardScreen(name, surname, gender);
+                                  return CardScreen(
+                                      name, surname, gender, date);
                                 },
                               ));
                             } else if (_formKey.currentState!.validate() &&
@@ -172,3 +184,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 }
+
+
