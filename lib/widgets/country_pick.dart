@@ -2,7 +2,9 @@ import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 
 class CountryPick extends StatelessWidget {
-  const CountryPick({
+  static String? country;
+
+  CountryPick({
     Key? key,
   }) : super(key: key);
 
@@ -30,7 +32,8 @@ class CountryPick extends StatelessWidget {
         initialSelection: 'US',
         onChanged: (CountryCode? code) {
           if (code != null) {
-
+            CountryPick.country = code.name!;
+            print(country);
           }
         },
         useUiOverlay: true,

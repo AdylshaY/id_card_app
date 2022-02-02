@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  const CountryPick(),
+                  CountryPick(),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) {
                                   return CardScreen(
-                                      name, surname, gender, date);
+                                      name, surname, gender, date, CountryPick.country!);
                                 },
                               ));
                             } else if (_formKey.currentState!.validate() &&
