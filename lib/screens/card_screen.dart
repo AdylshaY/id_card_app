@@ -1,4 +1,3 @@
-import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 
 class CardScreen extends StatelessWidget {
@@ -7,7 +6,9 @@ class CardScreen extends StatelessWidget {
   final String? gender;
   final DateTime date;
   final String country;
-  const CardScreen(this.name, this.surname, this.gender, this.date, this.country, {Key? key})
+  const CardScreen(
+      this.name, this.surname, this.gender, this.date, this.country,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -26,14 +27,25 @@ class CardScreen extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(name),
-              Text(surname),
-              Text(gender!),
-              Text(date.year.toString()),
-              Text(country),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(25)),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(25)),
+                ),
+              ),
             ],
           ),
         ));
