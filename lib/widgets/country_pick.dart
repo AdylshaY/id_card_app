@@ -2,7 +2,7 @@ import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 
 class CountryPick extends StatelessWidget {
-  static String? country;
+  static String country = 'United States';
 
   const CountryPick({
     Key? key,

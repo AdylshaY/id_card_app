@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:id_card_app/constants.dart';
 import 'package:id_card_app/screens/card_screen.dart';
+import 'package:id_card_app/screens/card_screen2.dart';
 import 'package:id_card_app/widgets/country_pick.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -160,8 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               String surname = myController2.text;
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) {
-                                  return CardScreen(
-                                      name, surname, gender, date, CountryPick.country!);
+                                  return CardScreen2(
+                                      name, surname, gender, date, CountryPick.country);
                                 },
                               ));
                             } else if (_formKey.currentState!.validate() &&
