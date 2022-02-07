@@ -28,14 +28,55 @@ class CardScreen extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Container(
+                  constraints: BoxConstraints(
+                    minWidth: MediaQuery.of(context).size.width,
+                  ),
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       border: Border.all(),
-                      borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25),
+                      color: const Color.fromRGBO(225, 255, 255, 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          "$country Identification Card",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/image/person.png",
+                              height: 175,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Name: $name"),
+                                  const SizedBox(height: 15),
+                                  Text("Surname: $surname"),
+                                  const SizedBox(height: 15),
+                                  Text("Gender: $gender"),
+                                  const SizedBox(height: 15),
+                                  Text(
+                                      "Birthday: ${date.day}-${date.month}-${date.year}"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Expanded(
@@ -43,7 +84,8 @@ class CardScreen extends StatelessWidget {
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       border: Border.all(),
-                      borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25),
+                      color: const Color.fromRGBO(225, 255, 255, 1))
                 ),
               ),
             ],

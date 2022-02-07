@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? gender;
 
   DateTime date = DateTime.now();
-  Future<Null> selectTimePicker(BuildContext context) async {
+  Future selectTimePicker(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: date,
