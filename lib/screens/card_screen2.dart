@@ -14,6 +14,7 @@ class CardScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -27,22 +28,40 @@ class CardScreen2 extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: Center(
-            child: Column(
-          children: [
-            FrontSideCard(
-                country: country,
-                name: name,
-                surname: surname,
-                date: date,
-                gender: gender),
-            Expanded(
-              child: Card(
-                child: Image.asset("assets/image/person.png"),
-                color: Colors.black26,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: SizedBox(
+                  width: size.width*0.95,
+                  child: FrontSideCard(
+                      country: country,
+                      name: name,
+                      surname: surname,
+                      date: date,
+                      gender: gender),
+                ),
               ),
-            ),
-          ],
-        )));
+              Center(
+                child: SizedBox(
+                  width: size.width*0.95,
+                  child: FrontSideCard(
+                      country: country,
+                      name: name,
+                      surname: surname,
+                      date: date,
+                      gender: gender),
+                ),
+              ),
+        
+              // Expanded(
+              //   child: Card(
+              //     child: Image.asset("assets/image/person.png"),
+              //     color: Colors.black26,
+              //   ),
+              // ),
+            ],
+          ),
+        ));
   }
 }

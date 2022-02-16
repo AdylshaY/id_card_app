@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:id_card_app/constants.dart';
-import 'package:id_card_app/screens/card_screen.dart';
 import 'package:id_card_app/screens/card_screen2.dart';
 import 'package:id_card_app/widgets/country_pick.dart';
 
@@ -48,139 +47,142 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Form(
               key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
-                      controller: myController,
-                      decoration: const InputDecoration(
-                          hintText: "Name",
-                          prefixIcon:
-                              Icon(Icons.people_rounded, color: Colors.black),
-                          border: outlineInputBorder,
-                          focusedBorder: outlineInputBorderFocused),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
-                      controller: myController2,
-                      decoration: const InputDecoration(
-                          hintText: "Surname",
-                          prefixIcon:
-                              Icon(Icons.people_rounded, color: Colors.black),
-                          border: outlineInputBorder,
-                          focusedBorder: outlineInputBorderFocused),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your surname";
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        child: const Text("Choose Your Birthday"),
-                        onPressed: () {
-                          selectTimePicker(context);
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        controller: myController,
+                        decoration: const InputDecoration(
+                            hintText: "Name",
+                            prefixIcon:
+                                Icon(Icons.people_rounded, color: Colors.black),
+                            border: outlineInputBorder,
+                            focusedBorder: outlineInputBorderFocused),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your name";
+                          }
+                          return null;
                         },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            "Your birthday: ${date.day.toString()}-${date.month.toString()}-${date.year.toString()}"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        controller: myController2,
+                        decoration: const InputDecoration(
+                            hintText: "Surname",
+                            prefixIcon:
+                                Icon(Icons.people_rounded, color: Colors.black),
+                            border: outlineInputBorder,
+                            focusedBorder: outlineInputBorderFocused),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your surname";
+                          }
+                          return null;
+                        },
                       ),
-                    ],
-                  ),
-                  const CountryPick(),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
+                    ),
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Gender: "),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        DropdownButton<String>(
-                          value: gender,
-                          items: genderList
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  child: Text(e),
-                                  value: e,
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              gender = value;
-                            });
+                        ElevatedButton(
+                          child: const Text("Choose Your Birthday"),
+                          onPressed: () {
+                            selectTimePicker(context);
                           },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                              "Your birthday: ${date.day.toString()}-${date.month.toString()}-${date.year.toString()}"),
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: ElevatedButton(
-                          child: const Text("Clear"),
-                          onPressed: () {
-                            setState(() {
-                              myController.text = "";
-                              myController2.text = "";
-                              gender = null;
-                            });
-                          },
+                    const CountryPick(),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Gender: "),
+                          const SizedBox(
+                            width: 25,
+                          ),
+                          DropdownButton<String>(
+                            value: gender,
+                            items: genderList
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    child: Text(e),
+                                    value: e,
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                gender = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: ElevatedButton(
+                            child: const Text("Clear"),
+                            onPressed: () {
+                              setState(() {
+                                myController.text = "";
+                                myController2.text = "";
+                                gender = null;
+                              });
+                            },
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      SizedBox(
-                        width: 100,
-                        child: ElevatedButton(
-                          child: const Text("Create"),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate() &&
-                                gender != null) {
-                              String name = myController.text;
-                              String surname = myController2.text;
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return CardScreen2(
-                                      name, surname, gender, date, CountryPick.country);
-                                },
-                              ));
-                            } else if (_formKey.currentState!.validate() &&
-                                gender == null) {
-                              showDialog(
-                                  context: context,
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: ElevatedButton(
+                            child: const Text("Create"),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate() &&
+                                  gender != null) {
+                                String name = myController.text;
+                                String surname = myController2.text;
+                                Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
-                                    return const AlertDialog(
-                                      content: Text("Select your gender"),
-                                    );
-                                  });
-                            }
-                          },
+                                    return CardScreen2(
+                                        name, surname, gender, date, CountryPick.country);
+                                  },
+                                ));
+                              } else if (_formKey.currentState!.validate() &&
+                                  gender == null) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const AlertDialog(
+                                        content: Text("Select your gender"),
+                                      );
+                                    });
+                              }
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               )),
         ));
   }
